@@ -4,8 +4,8 @@
 
 ## 1. Introduction
 <div align="center" style="display: flex; justify-content: center; gap: 20px;">
-<img src="img/scanning.jpg" alt="scanning pattern" width="50%" />
-<img src="img/RNR.jpg" alt="RNR" width="50%" />
+<img src="img/scanning.jpg" alt="scanning pattern" width="45%" />
+<img src="img/RNR.jpg" alt="RNR" width="45%" />
 </div>
 
 BenchRNR is a point cloud dataset for Infrastructure-based Vehicle Localization with both repetitive  and non-repetitive scanning LiDAR, in an effort to benchmark the performance of different LiDAR scanning patterns. It also provides the code for four typical vehicle pose estimation methods: 
