@@ -17,11 +17,15 @@ BenchRNR is a point cloud dataset for Infrastructure-based Vehicle Localization 
 
 
 
+
+
+
+
 ### Related Video
-Our accompanying videos are now available on **YouTube** (click below images to open).
-<div align="center">
-<a href="https://www.youtube.com/watch?v=v6c5B_N2JJs)" target="_blank"><img src="img/cover.png" alt="video" width="75%" /></a>
-</div>
+Our accompanying video is now available on [[YouTube](https://www.youtube.com/watch?v=v6c5B_N2JJs)]
+
+https://github.com/user-attachments/assets/149c0733-85b2-4039-8cae-6f7016559f17
+
 
 ## 2. Dataset Download
 <div align="center">
