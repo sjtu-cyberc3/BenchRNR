@@ -16,15 +16,13 @@ BenchRNR is a point cloud dataset for Infrastructure-based Vehicle Localization 
 + point cloud object detector PV-RCNN (PV-RCNN)
 
 
-
+Our code will be released soon.
 
 
 
 
 ### Related Video
-Our accompanying video is now available on [[YouTube](https://www.youtube.com/watch?v=v6c5B_N2JJs)]
-
-https://github.com/user-attachments/assets/149c0733-85b2-4039-8cae-6f7016559f17
+Our accompanying video is now available on [[YouTube](https://www.youtube.com/watch?v=5vLmBrVXfXU)]
 
 
 ## 2. Dataset Download
