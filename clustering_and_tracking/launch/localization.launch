@@ -1,0 +1,71 @@
+<launch>
+    <arg name="rviz" default="true" />
+    <param name="/use_sim_time" value="false" />
+
+    <arg name="arg_use_multi" default="false"/>
+    <param name="use_multi" type="bool" value="$(arg arg_use_multi)"/>
+
+    <arg name="arg_rings" default="128"/>
+    <param name="rings" type="int" value="$(arg arg_rings)"/>
+
+    <arg name="arg_auto" default="false"/>
+    <param name="auto" type="bool" value="$(arg arg_auto)"/>
+
+    <arg name="arg_traj_num_str" default="3"/>
+    <param name="traj_num_str" type="string" value="$(arg arg_traj_num_str)"/>
+
+    <arg name="arg_id_to_track" default="-1"/>
+    <param name="id_to_track" type="int" value="$(arg arg_id_to_track)"/>
+
+    <arg name="arg_bias" default="1.30"/>
+    <param name="bias" type="double" value="$(arg arg_bias)"/>
+
+    <arg name="arg_model_init" default="1"/>
+    <param name="model_init" type="int" value="$(arg arg_model_init)"/>
+
+    <arg name="arg_entry_center_x" default="37.2"/>
+    <param name="entry_center_x" type="double" value="$(arg arg_entry_center_x)"/>
+
+    <arg name="arg_entry_center_y" default="-14.83"/>
+    <param name="entry_center_y" type="double" value="$(arg arg_entry_center_y)"/>
+
+    <arg name="arg_entry_length" default="4"/>
+    <param name="entry_length" type="double" value="$(arg arg_entry_length)"/>
+
+    <arg name="arg_entry_width" default="10"/>
+    <param name="entry_width" type="double" value="$(arg arg_entry_width)"/>
+
+    <arg name="arg_entry_rot_angle" default="22"/>
+    <param name="entry_rot_angle" type="double" value="$(arg arg_entry_rot_angle)"/>
+
+    <group if="$(arg arg_use_multi)">
+        <group ns="multi">
+            <param name="rings" type="int" value="$(arg arg_rings)" />
+            <rosparam command="load" file="$(find foreground_segmentation)/config/e4_rep.yaml" />
+            <node pkg = "foreground_segmentation" name="foreground_segmentation" type="foreground_segmentation_node" output="screen"/>
+        </group>
+    </group>
+
+    <group unless="$(arg arg_use_multi)">
+
+        <group ns="livox_1">
+            <rosparam command="load" file="$(find foreground_segmentation)/config/e4_avia_1.yaml" />
+            <node pkg = "foreground_segmentation" name="foreground_segmentation" type="foreground_segmentation_node" output="screen"/>
+        </group>
+
+        <group ns="livox_2">
+            <rosparam command="load" file="$(find foreground_segmentation)/config/e4_avia_2.yaml" />
+            <node pkg = "foreground_segmentation" name="foreground_segmentation" type="foreground_segmentation_node"/>
+        </group>
+    </group>
+
+    <node pkg = "clustering_and_tracking" name="clustering_and_tracking" type="clustering_and_tracking_node" output="screen" required="true"/>
+
+    <group ns="master">
+        <group if="$(arg rviz)">
+            <node pkg="rviz" type="rviz" name="rviz" args="-d $(find clustering_and_tracking)/rviz/livox.rviz" />
+        </group>
+    </group>
+
+
+</launch>

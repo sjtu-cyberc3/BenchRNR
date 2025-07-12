@@ -16,7 +16,7 @@ BenchRNR is a point cloud dataset for Infrastructure-based Vehicle Localization 
 + point cloud object detector PV-RCNN (PV-RCNN)
 
 
-Our code will be released soon.
+Our code has been released.
 
 
 
@@ -39,7 +39,9 @@ Our data is released in the form of rosbags. There are eight rosbags in total, c
 
 
 ## News
-+ 2025-5-8:Release Dataset at [[BenchRNR Datasets](https://pan.sjtu.edu.cn/web/share/b48de37f470fb8a3d1f886c41495ee78)].
++ 2025-07-11: First commit on codes, allowing for both multi-line LiDAR & non-repetitive scanning LiDAR with auto-run and testing scripts. 👩‍💻
++ 2025-07-01: Our paper has been accepted by ITSC2025 🎉
++ 2025-05-08: Release Dataset at [[BenchRNR Datasets](https://pan.sjtu.edu.cn/web/share/b48de37f470fb8a3d1f886c41495ee78)]. 📂
 
 
 ## Acknowledgements

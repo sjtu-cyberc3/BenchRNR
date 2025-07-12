@@ -1,0 +1,22 @@
+subandpub:
+  sub_custom_topic: "/lidar_points"
+  sub_imu_topic: "/livox/imu_3JEDK6L0016N191"
+  livox_input_topic: "/livox2"
+  foreground_pc_topic: "/dynamic_pointcloud_filtered_1"
+  num: "1"
+
+background:
+  frame_agg_num: 600
+  background_file_name: background_rep.pcd
+  depth_image_name: "background_depth_rep.txt"
+  is_background_init: true
+
+  
+matrix:
+  delta_x: 7.4123766553
+  delta_y: -0.4155210401
+  delta_z: 19.24824524
+
+  yaw: 2.0166095650
+  pitch: 0.0085275648
+  roll: 0.7331175685
