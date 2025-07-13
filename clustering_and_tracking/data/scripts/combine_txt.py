@@ -49,7 +49,7 @@ def combine_and_fix_txt_files(
 
 if __name__ == "__main__":
 
-    for str in ['m_32']:
+    for str in ['m', 'n', 'm_64']:
         # combine_and_fix_txt_files(path_prefix="../gt/gt_gps", output_file_name="gt.txt", string_name="")
         
         combine_and_fix_txt_files(path_prefix="../detect/detect", output_file_name="detect_" + str + ".txt", string_name=str)
@@ -57,6 +57,5 @@ if __name__ == "__main__":
         
         # combine_and_fix_txt_files(path_prefix="../DL/DL", output_file_name="DL_" + str + ".txt", string_name=str)
         combine_and_fix_txt_files(path_prefix="../regist/regist", output_file_name="regist_" + str + ".txt", string_name=str)
-    # 
     
     

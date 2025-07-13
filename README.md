@@ -37,6 +37,9 @@ Our data is released in the form of rosbags. There are eight rosbags in total, c
 
  Download the data from [[BenchRNR Datasets](https://pan.sjtu.edu.cn/web/share/b48de37f470fb8a3d1f886c41495ee78)]
 
+### Quick Start
+
+See [quick_start](quick_start.md) for detailed installation and usage guide in this document.
 
 ## News
 + 2025-07-11: First commit on codes, allowing for both multi-line LiDAR & non-repetitive scanning LiDAR with auto-run and testing scripts. 👩‍💻

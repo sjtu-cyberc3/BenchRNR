@@ -49,7 +49,7 @@ def calculate_angle_error(cos1, sin1, cos2, sin2, type="detect"):
 
 # Function to calculate statistics
 def calculate_statistics(n):
-    """Compute mean, median, variance, and max of angle n"""
+    """Compute mean, median, std, and max of angle n"""
     n_filtered = n[~np.isnan(n)]
     
     lower_bound = np.nanmean(n) - 1.96 * np.nanstd(n)
@@ -59,10 +59,10 @@ def calculate_statistics(n):
 
     mean_error = np.mean(n)
     median_error = np.median(n)
-    variance_error = np.var(n)
+    std = np.std(n)
     max_error = np.max(n)
     
-    return mean_error, median_error, variance_error, max_error
+    return mean_error, median_error, std, max_error
 
 import numpy as np
 import pandas as pd
@@ -198,16 +198,16 @@ def main_api(str_num, method="Seg+obb"):
     filtered_error = dist_error[dist_error <= upper_bound]
     
     # Compute angle statistics
-    mean_error, median_error, variance_error, max_error = calculate_statistics(n)
+    mean_error, median_error, std, max_error = calculate_statistics(n)
     
     return {
         "str_num": str_num,
         "method": method,
         "mean_distance_error": np.mean(filtered_error),
-        "max_distance_error": np.max(filtered_error),
         "std_distance_error": np.std(filtered_error),
+        "max_distance_error": np.max(filtered_error),
         "mean_angle_error": mean_error,
-        "variance_angle_error": variance_error,
+        "std_angle_error": std,
         "max_angle_error": max_error,
         "total_frames": len(timestamps)
     }

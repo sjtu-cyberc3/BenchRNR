@@ -1,32 +1,59 @@
 #!/bin/bash
 
-# Set the directory containing rosbag files
-BAG_DIR="/home/runrunxin/SF/rosbag/e4/0408/ready" # Change this to your actual directory
+# Default values
+use_multi="false"
+ring_num="128"
+use_rviz="false"
+
+# Parse named parameters
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --use-multi)
+      use_multi="$2"
+      shift 2
+      ;;
+    --ring-num)
+      ring_num="$2"
+      shift 2
+      ;;
+    --use-rviz)
+      use_rviz="$2"
+      shift 2
+      ;;
+    -h|--help)
+      echo "Usage: $0 [--use-multi true|false] [--ring-num 128|64|32] [--use-rviz true|false]"
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $1"
+      exit 1
+      ;;
+  esac
+done
+
+echo "➤ Configurations:"
+echo "  use_multi: $use_multi"
+echo "  ring_num:  $ring_num"
+echo "  use_rviz:  $use_rviz"
+echo ""
+
+# Source ROS setup
 source ../devel/setup.bash
 
-# Set default values for use_multi and ring_num
-use_multi=${1:-false}  # Default to 'false' if no input is provided
-ring_num=${2:-128}       # Default to '128' if no input is provided
-use_rviz=${3:-false}       # Default to 'false' if no input is provided
+# Set the directory containing rosbag files
+BAG_DIR="/home/runrunxin/SF/rosbag/e4/0408/ready" # Change this to your actual directory
 
 
-# Iterate over all rosbag_*.bag files
-for bagfile in "$BAG_DIR"/rosbag*.bag
-do
-    # Get the filename without path, e.g., rosbag_2a.bag
+for bagfile in "$BAG_DIR"/rosbag*.bag; do
     filename=$(basename -- "$bagfile")
-
-    # Extract the trajectory ID, e.g., 2a
-    traj=${filename%.bag}          # rosbag_2a
-    traj=${traj#rosbag}            # Remove prefix rosbag_
+    traj=${filename%.bag}
+    traj=${traj#rosbag}
 
     echo "======== Running for traj: $traj ========"
 
-    # Play rosbag (in background)
     rosbag play "$bagfile" --clock &
     BAG_PID=$!
 
-    # Launch roslaunch file (in background) with use_multi and ring_num arguments
     roslaunch clustering_and_tracking localization.launch \
         arg_traj_num_str:="$traj" \
         arg_bias:=1.30 \
@@ -34,22 +61,14 @@ do
         arg_auto:=true \
         arg_model_init:=1 \
         arg_use_multi:=$use_multi \
-        rviz:=$use_rviz \
-        arg_rings:=$ring_num &
+        arg_rings:=$ring_num \
+        rviz:=$use_rviz &
     LAUNCH_PID=$!
 
-    echo "Started rosbag (PID=$BAG_PID) and launch file (PID=$LAUNCH_PID)"
-
-    # Wait for roslaunch to finish (make sure roslaunch exits when internal programs finish)
     wait $LAUNCH_PID
-    echo "Launch finished for $traj"
-
-    # Kill rosbag playback
     kill $BAG_PID
     wait $BAG_PID 2>/dev/null
-
-    echo "Killed rosbag for $traj"
-    echo ""
+    echo "Finished $traj"
 done
 
 echo "✅ All rosbag executions finished."

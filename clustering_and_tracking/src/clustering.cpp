@@ -8,7 +8,7 @@ void EuclideanCluster(pcl::PointCloud<pcl::PointXYZI>& input, std::vector<pcl::P
     for (int i = 0; i < input.size(); i++) {
         pcl::PointXYZI point;
         #ifdef MULTI
-        point.x = input[i].x * 0.3; //0.4
+        point.x = input[i].x * 0.8; //64-line: 0.4 32-line:0.3
         #else
         point.x = input[i].x;
         #endif
@@ -24,7 +24,7 @@ void EuclideanCluster(pcl::PointCloud<pcl::PointXYZI>& input, std::vector<pcl::P
     double distance_threshold = 0.5;
 
     #ifdef MULTI
-    distance_threshold = 0.6; //0.4
+    distance_threshold = 0.4; //0.6
     #endif
 
     if(is_special_case) {
